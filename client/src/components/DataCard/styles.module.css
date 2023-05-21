@@ -1,0 +1,22 @@
+.card {
+    background-color: var(--light-grey);
+    padding: 2em 4em 2em 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+    border-radius: 5px;
+}
+
+.emphasized_text {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--black);
+    margin-bottom: 0.5em;
+}
+
+.text {
+    font-size: 14px;
+    color: #74798C;
+    font-weight: 500
+}

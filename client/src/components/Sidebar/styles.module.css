@@ -1,0 +1,25 @@
+.sidebar {
+    width: 117px;
+    background-color: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3em;
+}
+
+.icons img {
+    cursor: pointer;
+}
+
+.copyright {
+    align-self: flex-end;
+    transform: rotate(-90deg);
+    color: #FFF;
+
+}
