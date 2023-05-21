@@ -1,6 +1,8 @@
+const API_URL = import.meta.env.VITE_APP_API_URL;
+
 async function getUserById(id) {
   try {
-    const response = await fetch(`http://localhost:3000/user/${id}`);
+    const response = await fetch(`${API_URL}/user/${id}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -10,9 +12,7 @@ async function getUserById(id) {
 
 async function getUserActivityById(id) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/user/${id}/activity`
-    );
+    const response = await fetch(`${API_URL}/user/${id}/activity`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -22,9 +22,7 @@ async function getUserActivityById(id) {
 
 async function getUserAverageSession(id) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/user/${id}/average-sessions`
-    );
+    const response = await fetch(`${API_URL}/user/${id}/average-sessions`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -34,9 +32,7 @@ async function getUserAverageSession(id) {
 
 async function getUserPerformance(id) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/user/${id}/performance`
-    );
+    const response = await fetch(`${API_URL}/user/${id}/performance`);
     const data = await response.json();
     return data;
   } catch (error) {
