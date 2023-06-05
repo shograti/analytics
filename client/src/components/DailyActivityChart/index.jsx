@@ -1,55 +1,50 @@
-import styles from "./styles.module.css";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  ResponsiveContainer,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
   Tooltip,
   Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
+  Bar,
+} from "recharts";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-);
+const DailyActivityChart = ({ sessions }) => {
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-  },
+  const data = sessions.map((session, index) => ({
+    name: index + 1,
+    kilograms: session.kilogram,
+    kcal: session.calories,
+  }));
+
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis orientation="right" />
+        <Tooltip />
+        <Bar
+          name=" "
+          dataKey="kilograms"
+          fill="#282D30"
+          barSize={10}
+          radius={5}
+        />
+        <Bar name="" dataKey="kcal" fill="#E60000" barSize={10} radius={5} />
+      </BarChart>
+    </ResponsiveContainer>
+  );
 };
-
-function DailyActivityChart({ sessions }) {
-  const labels = sessions.map((session, index) => index);
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Poids (kg)",
-        data: sessions.map((session) => session.kilogram),
-        backgroundColor: "#282D30",
-        borderRadius: 3,
-        barThickness: 10,
-      },
-      {
-        label: "Calories brûlées (kCal)",
-        data: sessions.map((session) => session.calories),
-        backgroundColor: "#E60000",
-        borderRadius: 3,
-        barThickness: 10,
-      },
-    ],
-  };
-  return <Bar options={options} data={data} />;
-}
 
 export default DailyActivityChart;

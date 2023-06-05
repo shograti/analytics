@@ -10,13 +10,13 @@ import carbsIcon from "../assets/carbs-icon.png";
 import fatIcon from "../assets/fat-icon.png";
 import proteinsIcon from "../assets/protein-icon.png";
 
-export const dataProcessor = {
+class Model {
   async getUserById(id) {
     const { data } = await getUserById(id);
 
-    const processedUser = {
+    const user = {
       userInfos: data.userInfos,
-      todayScore: data.todayScore,
+      todayScore: data.todayScore ? data.todayScore * 100 : data.score * 100,
       mainData: [
         {
           value: data.keyData.calorieCount,
@@ -44,10 +44,48 @@ export const dataProcessor = {
         },
       ],
     };
-    return processedUser;
-  },
+    return user;
+  }
+
   async getUserActivityById(id) {
     const { data } = await getUserActivityById(id);
     return data.sessions;
-  },
-};
+  }
+
+  async getUserAverageSessionsById(id) {
+    const { data } = await getUserAverageSession(id);
+    return data.sessions;
+  }
+
+  async getUserPerformanceById(id) {
+    const { data } = await getUserPerformance(id);
+    const performances = data.data.map((item) => ({
+      value: item.value,
+      kind: this.translate(data.kind[item.kind]),
+    }));
+    return performances;
+  }
+
+  translate(kind) {
+    switch (kind) {
+      case "cardio":
+        return "Cardio";
+      case "energy":
+        return "Energie";
+      case "endurance":
+        return "Endurance";
+      case "strength":
+        return "Force";
+      case "speed":
+        return "Vitesse";
+      case "intensity":
+        return "Intensité";
+      default:
+        break;
+    }
+  }
+}
+
+const model = new Model();
+
+export default model;
